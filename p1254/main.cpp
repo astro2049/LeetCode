@@ -23,6 +23,10 @@ public:
     }
 
     void dfs(vector<vector<int>>& grid, int y, int x, vector<vector<bool>>& visited, bool& isClosed) {
+        if (y < 0 || y > grid.size() - 1 || x < 0 || x > grid[0].size() - 1) {
+            isClosed = false;
+            return;
+        }
         if (grid[y][x] == 1) {
             return;
         }
@@ -30,26 +34,10 @@ public:
             return;
         }
         visited[y][x] = true;
-        if (y - 1 >= 0) {
-            dfs(grid, y - 1, x, visited, isClosed);
-        } else {
-            isClosed = false;
-        }
-        if (x + 1 <= grid[0].size() - 1) {
-            dfs(grid, y, x + 1, visited, isClosed);
-        } else {
-            isClosed = false;
-        }
-        if (y + 1 <= grid.size() - 1) {
-            dfs(grid, y + 1, x, visited, isClosed);
-        } else {
-            isClosed = false;
-        }
-        if (x - 1 >= 0) {
-            dfs(grid, y, x - 1, visited, isClosed);
-        } else {
-            isClosed = false;
-        }
+        dfs(grid, y - 1, x, visited, isClosed);
+        dfs(grid, y, x + 1, visited, isClosed);
+        dfs(grid, y + 1, x, visited, isClosed);
+        dfs(grid, y, x - 1, visited, isClosed);
     }
 };
 
