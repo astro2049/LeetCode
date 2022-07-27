@@ -25,20 +25,19 @@ public:
     bool isBalancedMarker = true;
 
     bool isBalanced(TreeNode *root) {
-        traverse(root, 0);
+        traverse(root);
         return isBalancedMarker;
     }
 
-    int traverse(TreeNode *now, int height) {
+    int traverse(TreeNode *now) {
         if (now == nullptr) {
-            return height;
+            return 0;
         }
-        height++;
-        int leftSubTreeHeight = traverse(now->left, height);
-        int rightSubTreeHeight = traverse(now->right, height);
+        int leftSubTreeHeight = traverse(now->left);
+        int rightSubTreeHeight = traverse(now->right);
         if (abs(leftSubTreeHeight - rightSubTreeHeight) > 1) {
             isBalancedMarker = false;
         }
-        return max(leftSubTreeHeight, rightSubTreeHeight);
+        return max(leftSubTreeHeight, rightSubTreeHeight) + 1;
     }
 };
